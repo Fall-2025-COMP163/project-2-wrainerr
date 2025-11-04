@@ -209,7 +209,7 @@ class Rogue(Player):
         """
         Special rogue ability - guaranteed critical hit.
         """
-        sneak_damage = (self.strength + 8) * 0.5  # Sneak attack damage calculation
+        sneak_damage = (self.strength + 50) * 0.5  # Sneak attack damage calculation
         target.take_damage(sneak_damage)
         print(f"{self.name} performs a Sneak Attack on {target.name} for {sneak_damage} damage!")
 
@@ -232,7 +232,7 @@ class Weapon:
         """
         print(f"Weapon: {self.name}, Damage Bonus: {self.damage_bonus}")
 
-class Warlock(Character):
+class Warlock(Player):
     def __init__(self, name):
         super().__init__(name, 90, 60, 75)
 
@@ -245,6 +245,20 @@ class Warlock(Character):
         shadow_damage = (self.magic + 12) * 0.6
         target.take_damage(shadow_damage)
         print(f"{self.name} casts Shadow Bolt on {target.name} for {shadow_damage} damage!")
+
+class Paladin(Player):
+    def __init__(self, name):
+        super().__init__(name, 130, 18, 30)
+
+    def attack(self, target):
+        damage = (self.strength + self.magic * 0.2) * 0.5
+        target.take_damage(damage)
+        print(f"{self.name} strikes {target.name} with holy power for {damage} damage!")
+
+    def holy_light(self, target):
+        heal_amount = 20
+        target.health += heal_amount
+        print(f"{self.name} casts Holy Light on {target.name}, healing for {heal_amount} health!")
 # ============================================================================
 # MAIN PROGRAM FOR TESTING (YOU CAN MODIFY THIS FOR TESTING)
 # ============================================================================
@@ -253,19 +267,13 @@ if __name__ == "__main__":
     print("=== CHARACTER ABILITIES SHOWCASE ===")
     print("Testing inheritance, polymorphism, and method overriding")
     print("=" * 50)
-    
-    # warrior = Warrior("Sir Galahad")
-    # mage = Mage("Merlin")
-    # rogue = Rogue("Robin Hood")
+
+    #Create instances of each character class
     warrior = Warrior("Sir Rayner")
     mage = Mage("Gandalf")
     rogue = Rogue("Shadow")
     
     #Display their stats
-    # print("\n📊 Character Stats:")
-    # warrior.display_stats()
-    # mage.display_stats()
-    # rogue.display_stats()
     print("\n📊 Character Stats:")
     for character in [warrior, mage, rogue]:
         character.display_stats()
