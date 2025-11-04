@@ -232,6 +232,19 @@ class Weapon:
         """
         print(f"Weapon: {self.name}, Damage Bonus: {self.damage_bonus}")
 
+class Warlock(Character):
+    def __init__(self, name):
+        super().__init__(name, 90, 60, 75)
+
+    def attack(self, target):
+        damage = self.magic * 0.6
+        target.take_damage(damage)
+        print(f"{self.name} casts a dark spell on {target.name} for {damage} damage!")
+
+    def shadow_bolt(self, target):
+        shadow_damage = (self.magic + 12) * 0.6
+        target.take_damage(shadow_damage)
+        print(f"{self.name} casts Shadow Bolt on {target.name} for {shadow_damage} damage!")
 # ============================================================================
 # MAIN PROGRAM FOR TESTING (YOU CAN MODIFY THIS FOR TESTING)
 # ============================================================================
