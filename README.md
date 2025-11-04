@@ -1,147 +1,143 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/mMxhKicI)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21473335&assignment_repo_type=AssignmentRepo)
-# COMP 163 - Project 2: Character Abilities Showcase
+# COMP 163 — Project 2: Character Abilities Showcase
 
-## 🎯 Project Overview
+**Author:** Rayner Paulino-Payano  
+**Date:** 2025-11-04
 
-Build a simple character system that demonstrates mastery of object-oriented programming fundamentals: inheritance, method overriding, polymorphism, and composition. This project focuses on core OOP concepts without the complexity of a full game system.
+> AI usage: This README was generated (and later edited) with the help of an AI.
 
-## 📋 Getting Started
+## Project Overview
 
-1. **Complete your implementation** in `project2_starter.py`
-2. **Test your code** by running: `python project2_starter.py`
-3. **Run automated tests** with: `python -m pytest tests/ -v`
-4. **Commit and push** to see GitHub test results
+This repository contains a small Python project that demonstrates core Object-Oriented Programming (OOP) principles: inheritance, polymorphism, method overriding, and composition. The code models a simple role-playing game (RPG) character hierarchy and a tiny battle system to showcase different class abilities.
 
-## 🏗️ What You're Building
+## Class Structure
 
-### **Class Structure (6 Classes Total)**
+### Inheritance Hierarchy
 
-```
-Character (base class)
-    ↓
-Player (inherits from Character)  
-    ↓
-Warrior, Mage, Rogue (inherit from Player)
+The project uses the following inheritance structure (children inherit and specialize features from their parents):
 
-Weapon (composition - separate class)
-```
+- `Character` — base class for all entities
+- `Player` — base class for playable characters (inherits from `Character`)
+  - `Warrior` (subclass of `Player`)
+  - `Mage` (subclass of `Player`)
+  - `Rogue` (subclass of `Player`)
+  - `Warlock` (subclass of `Player`)
+  - `Paladin` (subclass of `Player`)
 
-### **Required Stats for Each Class:**
+### Composition
 
-| Class   | Health | Strength | Magic | Special Ability |
-|---------|--------|----------|-------|-----------------|
-| Warrior | 120    | 15       | 5     | Power Strike    |
-| Mage    | 80     | 8        | 20    | Fireball        |
-| Rogue   | 90     | 12       | 10    | Sneak Attack    |
+- `Weapon` — demonstrates composition (a "has-a" relationship). A character can possess a `Weapon` instance which modifies attacks.
 
-## 🎮 Core Functionality
+### Provided Battle System
 
-### **All Characters Must Have:**
-- `attack(target)` - Basic attack method
-- `take_damage(damage)` - Reduce health
-- `display_stats()` - Print character information
+- `SimpleBattle` — a helper class (marked DO NOT MODIFY) that simulates a one-round fight between two `Character` objects.
 
-### **Players Additionally Have:**
-- `character_class` attribute (like "Warrior", "Mage")
-- `level` and `experience` attributes
-- Enhanced `display_stats()` that shows player info
+## Features & Abilities
 
-### **Special Abilities (Each Class):**
-- **Warrior**: `power_strike(target)` - High damage attack
-- **Mage**: `fireball(target)` - Magic damage attack
-- **Rogue**: `sneak_attack(target)` - Critical hit attack
+Below are the main classes and their responsibilities:
 
-### **Weapons (Composition):**
-- `Weapon(name, damage_bonus)` - Characters can HAVE weapons
-- `display_info()` - Show weapon information
+- `Character`
+  - `attack(target)` — a basic strength-based attack
+  - `take_damage(damage)` — subtracts health (no negative health)
+  - `display_stats()` — prints name, health, strength, and magic
 
-## ✅ Testing Your Code
+- `Player` (extends `Character`)
+  - overrides `display_stats()` to include class, level, and experience
 
-### **Local Testing**
+- `Warrior`
+  - stronger, strength-based `attack()`
+  - `power_strike(target)` — higher strength damage
+
+- `Mage`
+  - magic-based `attack()`
+  - `fireball(target)` — high magic damage
+
+- `Rogue`
+  - swift `attack()`
+  - `sneak_attack(target)` — large damage when conditions met
+
+- `Warlock`
+  - dark/magic `attack()`
+  - `shadow_bolt(target)` — high magic damage
+
+- `Paladin`
+  - hybrid strength+magic `attack()`
+  - `holy_light(target)` — heals the target
+
+## How to run
+
+1. Ensure you have Python 3 installed.
+2. Save the project code (if not already saved) — for example `project2.py`.
+3. From a terminal, run:
+
 ```bash
-# Run all tests
-python -m pytest tests/ -v
-
-# Run specific test categories
-python -m pytest tests/test_inheritance.py -v
-python -m pytest tests/test_method_overriding.py -v
-python -m pytest tests/test_special_abilities.py -v
-
-# Test your main program
-python project2_starter.py
+python project2.py
 ```
 
-### **GitHub Testing**
+The project may also include unit tests in the `tests/` directory; run them with your preferred test runner (e.g., `pytest`).
 
-After pushing your code, check the **Actions** tab to see automated test results:
+## Example output
 
-- ✅ **Inheritance Tests** (20 points) - Class structure and inheritance chain
-- ✅ **Method Overriding Tests** (20 points) - Polymorphism and customized methods
-- ✅ **Special Abilities Tests** (15 points) - Character abilities and composition
+Running the script (or the demo block under `if __name__ == "__main__"`) will print a short demonstration of characters, their stats, attacks, special abilities, and a simple battle. Example (truncated):
 
-## 🎮 Example Usage
+```text
+=== CHARACTER ABILITIES SHOWCASE ===
+Testing inheritance, polymorphism, and method overriding
+==================================================
 
-Your program should work like this:
+📊 Character Stats:
+Character: Sir Rayner
+  Health: 120
+  Strength: 15
+  Magic: 5
+  Class: Warrior
+  Level: 1
+  Experience: 0
+------------------------------
+Character: Gandalf
+  Health: 80
+  Strength: 8
+  Magic: 20
+  Class: Mage
+  Level: 1
+  Experience: 0
+------------------------------
 
-```python
-# Create characters (inheritance)
-warrior = Warrior("Marcus")
-mage = Mage("Aria")  
-rogue = Rogue("Shadow")
+⚔️ Testing Polymorphism (same attack method, different behavior):
 
-# Polymorphism - same method, different behavior
-for character in [warrior, mage, rogue]:
-    character.attack(target)  # Each attacks differently
+Sir Rayner attacks the dummy:
+Sir Rayner powerfully attacks Target Dummy for 10.0 damage!
 
-# Special abilities
-warrior.power_strike(enemy)
-mage.fireball(enemy)
-rogue.sneak_attack(enemy)
+Gandalf attacks the dummy:
+Gandalf casts a spell on Target Dummy for 14.0 damage!
 
-# Composition
-sword = Weapon("Iron Sword", 15)
-sword.display_info()
+✨ Testing Special Abilities:
+Sir Rayner uses Power Strike on Enemy1 for 12.5 damage!
+Gandalf casts Fireball on Enemy2 for 21.0 damage!
 
-# Test battle system (provided for you)
-battle = SimpleBattle(warrior, mage)
-battle.fight()
+⚔️ Testing Battle System:
+
+=== BATTLE: Sir Rayner vs Gandalf ===
+
+--- Round 1 ---
+Sir Rayner attacks:
+Sir Rayner powerfully attacks Gandalf for 10.0 damage!
+
+Gandalf attacks:
+Gandalf casts a spell on Sir Rayner for 14.0 damage!
+
+--- Battle Results ---
+Character: Sir Rayner
+  Health: 106.0
+Character: Gandalf
+  Health: 70.0
+🏆 Sir Rayner wins!
+
+✅ Testing complete!
 ```
 
-## 🎲 SimpleBattle System (Provided)
+## Notes
 
-You have a **SimpleBattle** class already written that you can use to test your characters:
+- This README focuses on documentation and examples. See the `tests/` directory for unit tests that verify inheritance, method overriding, and special abilities.
 
-```python
-battle = SimpleBattle(character1, character2)
-battle.fight()  # Simulates a simple battle
-```
+--
 
-**⚠️ DO NOT MODIFY the SimpleBattle class** - it's provided for testing your implementations.
-
-## ⚠️ Important Notes
-
-### **Protected Files**
-- **DO NOT MODIFY** files in the `tests/` directory
-- **DO NOT MODIFY** the `SimpleBattle` class
-- Modifying protected files will result in automatic academic integrity violation
-
-### **AI Usage Policy**
-- ✅ **Allowed**: AI assistance for implementation, debugging, learning
-- 📝 **Required**: Document AI usage in code comments
-- 🎯 **Must be able to explain**: Every class and method during interview
-
-## 🏆 Grading
-
-- **Inheritance Tests (20%)**: Proper 3-level inheritance chain
-- **Method Overriding (20%)**: Polymorphism and customized behaviors
-- **Special Abilities (15%)**: Character-specific methods and composition
-- **Code Quality (5%)**: Professional comments and documentation
-- **Interview (40%)**: Code explanation and live coding
-
-## 🎨 Bonus Creative Elements
-
-Feel free to add your own creative touches for bonus points:
-- Additional character classes beyond the three required
-- More weapon types with different properties
-- Enhanced special abilities with unique effects
